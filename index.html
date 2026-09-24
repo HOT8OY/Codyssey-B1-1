@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOT8OY Introduction</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main-logic.js" defer></script>
+</head>
+<body>
+    <div class="floating-container">
+        <button class="floating-item floating-button-up">위로가기 버튼 이미지</button>
+        <button class="floating-item floating-darkmode">다크모드 해/달 이모지</button>
+    </div>
+    <header>
+        <nav id="nav-container">
+            <div class="logo"><img class="logo-img" src="/assets/profile_image.png" alt="logo-image"></div>
+            <!-- 모바일 햄버거 버튼 -->
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="메뉴 열기">☰</button>
+            <ul class="nav-button-container" id="nav-menu">
+                <li class="nav-item"><a href="#hero">Hero</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+                <li class="nav-item"><a href="#skills">Skills</a></li>
+                <li class="nav-item"><a href="#projects">Projects</a></li>
+                <li class="nav-item"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-container">
+            <div class="hero-item">
+                <h1 class="section-name">안녕하세요, 프론트엔드 개발자 HOT8OY입니다</h1>
+                <p>
+                    사용자 경험과 웹 표준을 고민하는 주니어 개발자입니다. <br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat tenetur eos dignissimos similique est, accusantium soluta maxime. Molestiae necessitatibus explicabo nesciunt, cumque quidem illo eligendi nam ipsum! Repellat, tempore quas.
+                </p>
+            </div>
+        </section>
+        <section id="about">about
+                <h2 class="section-name">안녕하세요, 프론트엔드 개발자 HOT8OY입니다</h2>
+                <p>
+                    사용자 경험과 웹 표준을 고민하는 주니어 개발자입니다.
+                </p>
+        </section>
+        <section id="skills">
+                <h2 class="section-name">보유 기술</h2>
+                <ul>
+                    <li>프론트엔드</li>
+                    <li>백엔드</li>
+                    <li>Tools</li>
+                    <li></li>
+                    <li></li>
+                </ul>
+        </section>
+        <section id="projects">
+                <h2 class="section-name">Projects</h2>
+                <!-- 상태 표시 역역 (로딩, 에러, 없음 등을 안내) -->
+                 <div class="projects-status" id="projects-status">
+                    <div class="spinner"></div>
+                    <p>Github 프로젝트를 불러오는 중...</p>
+                 </div>
+
+                 <!-- Github 레포지토리 카드들이 들어갈 Grid 컨테이너 -->
+                  <div id="projects-container" class="projects-container">
+
+                  </div>
+        </section>
+        <section id="contact">
+            <h2 class="section-name">Contact</h2>
+            <form action="/email" method="post" id="contact-form">
+                <h3>이메일 보내기</h3>
+                <div class="form-name">
+                    <label for="name">이름: </label>
+                    <input type="text" name="name" id="name" required>
+                    <!-- 검증 에러 문구 -->
+                     <span class="error-msg" id="name-error"></span>
+                </div>
+                <div class="form-email">
+                    <label for="email">Email: </label>
+                    <input type="email" name="email" id="email" required>
+                    <span class="error-msg" id="email-error"></span>
+                </div>
+                <div class="form-message">
+                    <label for="message">Message: </label>
+                    <textarea name="message" id="message"></textarea>
+                    <span class="error-msg" id="message-error"></span>
+                </div>
+                <button type="submit" class="btn-submit">보내기</button>
+
+                <!-- 전송 성공시 메시지 -->
+                <p class="form-status" id="form-status"></p>
+            </form>
+        </section>
+    </main>
+<hr>
+    <footer>
+        꼬릿말
+    </footer>
+</body>
+</html>
