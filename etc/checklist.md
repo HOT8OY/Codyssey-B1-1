@@ -7,6 +7,7 @@
 ## 1. 구현 체크리스트
 
 ### 1) HTML 마크업 (기본 뼈대 & 접근성) - 100% 완료 🎉
+
 - [x] 기본 폴더 및 파일 구조 분리 (`css/`, `js/`, `assets/`)
 - [x] 외부 CSS 및 JS 연결 (`defer` 속성 적용)
 - [x] 시맨틱 태그 구조화 (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`)
@@ -18,17 +19,19 @@
 - [x] Projects 섹션에 비동기 상태별 컨테이너 마크업 (`#projects-status`, `#projects-container`)
 
 ### 2) CSS & 스타일링 (반응형 & 디자인) - 약 70% 완료
+
 - [x] **CSS 변수(`:root`) 정의**: 주요 색상, 배경색, 텍스트 색상, 여백 등
 - [x] **다크 모드 CSS 변수 정의**: `[data-theme="dark"]` 선택자로 색상 반전 처리
 - [x] 헤더 및 네비게이션 Flexbox 정렬 및 상단 고정(`position: sticky`)
 - [x] 플로팅 버튼(위로가기, 다크모드) Flexbox 및 우하단 고정(`position: fixed`)
 - [x] 모바일 화면에서 기존 메뉴 숨기고 햄버거 버튼 표시 (`@media (max-width: 768px)`)
 - [x] 시각 효과 (버튼 hover 애니메이션, transition, shadow 변수 적용)
-- [ ] 부드러운 스크롤 적용 (`html { scroll-behavior: smooth; }`)
+- [x] 부드러운 스크롤 적용 (`html { scroll-behavior: smooth; }`)
 - [ ] **Projects 카드 Grid 레이아웃**: `auto-fit`과 `minmax`를 활용한 반응형 카드 배치
 - [ ] 태블릿/데스크톱 섹션별 상세 여백 및 폰트 크기 반응형 조율
 
 ### 3) JavaScript 인터랙션 & 폼 UX - 다음 단계!
+
 - [ ] **햄버거 메뉴 토글**: 클릭 시 모바일 메뉴 열림/닫힘 (`classList.toggle('active')`)
 - [ ] **위로 가기(Scroll-to-top) 버튼**:
   - [ ] 스크롤 300px 이상 내렸을 때만 버튼 노출 (그전엔 숨김)
@@ -44,6 +47,7 @@
 - [ ] **스크롤 애니메이션**: `IntersectionObserver`로 섹션 진입 시 페이드인 효과
 
 ### 4) GitHub API 연동 (비동기 처리)
+
 - [ ] `fetch` 및 `async/await`로 `https://api.github.com/users/{본인아이디}/repos` 호출
 - [ ] `try...catch` 예외 처리 (시간당 60회 제한 등 403 에러 처리 포함)
 - [ ] **상태별 UI 분기**:
@@ -53,6 +57,7 @@
   - [ ] 빈 상태: 레포지토리가 없을 때 안내 문구
 
 ### 5) 배포 & 문서화
+
 - [ ] GitHub 저장소 push 및 GitHub Pages 배포
 - [ ] `README.md` 작성 (프로젝트 소개, 기술 스택, 배포 링크, 스크린샷)
 
@@ -67,7 +72,7 @@ graph TD
     Step3 --> Step4[4단계: 폼 Contact 유효성 검사]
     Step4 --> Step5[5단계: GitHub API 비동기 연동 & 카드 그리드]
     Step5 --> Step6[6단계: 스크롤 애니메이션 & 최종 배포]
-    
+
     style Step1 fill:#d4edda,stroke:#28a745
     style Step2 fill:#d4edda,stroke:#28a745
     style Step3 fill:#fff3cd,stroke:#ffc107
