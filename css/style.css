@@ -67,9 +67,18 @@ body {
 li {
     list-style: none;
 }
+
 /* 섹션별 모바일 / PC 폰트 크기 및 여백 */
+/* section은 처음에 숨겨뒀다고 IntersectionObserver로 보이게 */
 section {
     padding-block: 40px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 .section-name {
     font-size: 24px; /* 모바일 제목 크기 */
@@ -117,7 +126,14 @@ section {
     transform: translateY(-2px);
 }
 .floating-button-up {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
     background-color: var(--accent-color);
+}
+.floating-button-up.show {
+    opacity: 1;
+    visibility: visible;
     color: white;
 }
 .floating-darkmode {
@@ -141,7 +157,15 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    /* 배경색과 그림자가 부드럽게 바뀌도록 transition 추가 */
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
+/* 동적 Header : 스크롤 시 변하게 */
+header.scrolled {
+    background-color: var(--bg-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .logo-img {
     width: 55px;
     height: 55px;
@@ -239,12 +263,32 @@ header {
 #message {
     display: block;
     margin-top: 10px;
-    padding: 10px; /* 내부 글자가 radius 속성에 의해 안잘리게 */
-    width: fit-content;
-    max-width: inherit;
-    height: fit-content;
+    padding: 12px;
+    
+    /* 1. 가로 너비: 부모 영역에 꽉 차게 */
+    width: 100%;
+    box-sizing: border-box; /* 패딩이 더해져도 밖으로 삐져나가지 않게 */
+    max-width: 100%;        /* 부모 너비를 넘지 않도록 최대 너비 제한 */
+    /* 2. 세로 높이: 7줄 정도 (약 150px) */
+    min-height: 150px;      /* 최소/기본 7줄 높이 */
+    max-height: 350px;      /* 사용자가 늘릴 수 있는 최대 높이 */
+    /* 3. 크기 조절 옵션 */
+    resize: vertical;       /* 마우스로 늘릴 때 좌우는 고정하고 세로로만 조절되게 */
+    /* 4. 스타일 및 폰트 */
+    font-family: inherit;   /* textarea 기본 폰트 대신 본문 폰트 계승 */
     border: 1px solid var(--border-color);
-    border-radius: 15px;
+    border-radius: 12px;
     background-color: var(--bg-primary);
     color: var(--text-primary);
+}
+.error-msg {
+    color: #ef4444; /* 빨간색 에러 */
+    font-size: 13px;
+    display: block;
+    margin-top: 4px;
+}
+.form-status {
+    color: #10b981; /* 초록색 성공 */
+    font-weight: bold;
+    margin-top: 12px;
 }
