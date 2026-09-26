@@ -27,8 +27,8 @@
 - [x] 모바일 화면에서 기존 메뉴 숨기고 햄버거 버튼 표시 (`@media (max-width: 768px)`)
 - [x] 시각 효과 (버튼 hover 애니메이션, transition, shadow 변수 적용)
 - [x] 부드러운 스크롤 적용 (`html { scroll-behavior: smooth; }`)
-- [ ] **Projects 카드 Grid 레이아웃**: `auto-fit`과 `minmax`를 활용한 반응형 카드 배치
-- [ ] 태블릿/데스크톱 섹션별 상세 여백 및 폰트 크기 반응형 조율
+- [x] **Projects 카드 Grid 레이아웃**: `auto-fit`과 `minmax`를 활용한 반응형 카드 배치
+- [x] 태블릿/데스크톱 섹션별 상세 여백 및 폰트 크기 반응형 조율
 
 ### 3) JavaScript 인터랙션 & 폼 UX - 다음 단계!
 

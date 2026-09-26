@@ -67,6 +67,22 @@ body {
 li {
     list-style: none;
 }
+/* 섹션별 모바일 / PC 폰트 크기 및 여백 */
+section {
+    padding-block: 40px;
+}
+.section-name {
+    font-size: 24px; /* 모바일 제목 크기 */
+    margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+    section {
+        padding-block: 80px;
+    }
+    .section-name {
+        font-size: 36px;
+    }
+}
 
 
 /* 이미지 관련 */
