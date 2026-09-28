@@ -116,11 +116,14 @@ section.visible {
 ========================================= */
 /* 1. 이미지 컨테이너: 1:1 비율 고정 + 세로 중앙 정렬 */
 .section-media {
+    width: 100%;
+    max-width: 90%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 16px;
     box-shadow: var(--card-shadow);
-    align-self: center; /* 세로축 기준 가운데 정렬 */
+    align-self: center;
+    /* 세로축 기준 가운데 정렬 */
 }
 
 /* 이미지는 컨테이너를 꽉 채우되, 비율 유지하며 중앙 크롭 */
@@ -147,8 +150,14 @@ section.visible {
     align-items: center;
 }
 
-.section-content {
-    width: 100%;
+/* 모바일에서는 이미지(.section-media) -> 본문(.section-content) 순서로 표시 */
+.split-section .section-media {
+    order: 1;
+}
+
+.split-section .section-content {
+    width: 90%;
+    order: 2;
 }
 
 /* 3. 태블릿 (768px 이상): 가로 배치 */
@@ -162,14 +171,18 @@ section.visible {
         gap: 48px;
     }
 
-    /* ⭐️ 핵심: 1/3 : 2/3 비율 분할 (1 대 2) */
-    .section-media {
+    /* 태블릿/데스크톱에서는 원래 HTML 순서대로 배치 복원 */
+    .split-section .section-media {
+        order: 0;
         flex: 1;
         /* 전체의 1/3 (약 33.3%) */
-        width: auto; /* 모바일 100% 해제 */
+        width: auto;
+        /* 모바일 100% 해제 */
+        max-width: none;
     }
 
-    .section-content {
+    .split-section .section-content {
+        order: 0;
         flex: 2;
         /* 전체의 2/3 (약 66.6%) */
         width: auto;
