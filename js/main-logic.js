@@ -148,11 +148,11 @@ const containerEl = document.querySelector('#projects-container') // Git repo가
 async function fetchGithubRepos() {
     // 1. 로딩 상태 표시
     statusEl.innerHTML = `
-        < div class="spinner" ></ >
+        <div class="spinner"></div>
         <p>Github 프로젝트를 불러오는 중...</p>
         `;
     statusEl.classList.add('show');
-    containerEl.ineerHTML = ''; // 이전 카드 초기화
+    containerEl.innerHTML = ''; // 이전 카드 초기화
 
     try {
         const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
@@ -182,7 +182,7 @@ async function fetchGithubRepos() {
             <div class="project-card">
             <h3>${repo.name}</h3>
             <p>${repo.description || '설명 없음'}</p>
-            <span>⭐️ ${repo.stargazer_count}</span>
+            <span>⭐️ ${repo.stargazers_count}</span>
             <a href="${repo.html_url}" target='_blank'>Github 보기</a>
             </div>`)
             .join('');
@@ -190,12 +190,13 @@ async function fetchGithubRepos() {
         // 6. 에러 상태 처리
         statusEl.innerHTML = `
         <p>프로젝트를 불러올 수 없습니다.</p>
+        <p>${error.message}</p>
         <button id="retry-btn">다시 시도</button>
         `;
         statusEl.classList.add('show');
         console.error('레포지토리 로드 실패: ', error.message);
 
-        // 7. 다시 시도 번튼 이벤트
+        // 7. 다시 시도 버튼 이벤트
         document.querySelector('#retry-btn').addEventListener('click', fetchGithubRepos);
     }
 }

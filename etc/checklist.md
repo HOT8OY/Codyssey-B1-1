@@ -28,12 +28,12 @@
 - [x] 모바일 화면에서 기존 메뉴 숨기고 햄버거 버튼 표시 (`@media (min-width: 768px)` 기준 분기)
 - [ ] **반응형 브레이크포인트 적용**:
   - [x] 태블릿: 768px 미디어 쿼리 적용 (`@media (min-width: 768px)`)
-  - [ ] 데스크톱: 1024px 미디어 쿼리 세부 레이아웃 조율 (`@media (min-width: 1024px)`)
+  - [x] 데스크톱: 1024px 미디어 쿼리 세부 레이아웃 조율 (`@media (min-width: 1024px)`)
 - [x] **Projects 카드 Grid 레이아웃**: `auto-fit`과 `minmax`를 활용한 반응형 카드 배치
 - [x] **컴포넌트 시각 효과 & 전환**:
   - [x] 카드 그림자 효과 (`box-shadow: var(--card-shadow)`)
   - [x] 부드러운 전환 효과 (`transition: var(--transition-speed)`)
-  - [ ] 버튼 및 카드 호버(`hover`) 인터랙션 완성 (플로팅 버튼 외 일반 버튼/프로젝트 카드 hover 효과 추가 필요)
+  - [x] 버튼 및 카드 호버(`hover`) 인터랙션 완성 (플로팅 버튼 외 일반 버튼/프로젝트 카드 hover 효과 추가 필요)
 - [x] 부드러운 스크롤 적용 (`html { scroll-behavior: smooth; }`)
 
 ### 3) JavaScript 문법 & 인터랙션 & 폼 UX - 약 50% 완료
@@ -42,11 +42,11 @@
   - [x] `var` 대신 `const`, `let`만 사용
   - [x] 인라인 이벤트 속성(`onclick` 등) 대신 `addEventListener` 사용
   - [x] HTML 파일 내 인라인 스타일(`style="..."`) 속성 미사용 (mission.md 필수 제약)
-  - [ ] (권장) JS 상태 제어 시 `element.style` 직접 조작 대신 `classList` 토글 활용
+  - [x] (권장) JS 상태 제어 시 `element.style` 직접 조작 대신 `classList` 토글 활용
   - [x] 화살표 함수(Arrow Function) 활용
-  - [ ] 템플릿 리터럴로 동적 HTML 생성 (API 연동 시 활용)
-  - [ ] 객체/배열 구조분해 할당(Destructuring) 활용 (API 연동 시 활용)
-  - [ ] 배열 메서드(`map`, `forEach`) 활용 (API 연동 시 활용)
+  - [x] 템플릿 리터럴로 동적 HTML 생성 (API 연동 시 활용)
+  - [x] 객체/배열 구조분해 할당(Destructuring) 활용 (API 연동 시 활용)
+  - [x] 배열 메서드(`map`, `forEach`) 활용 (API 연동 시 활용)
 - **인터랙션 구현**:
   - [x] **햄버거 메뉴 토글**: 클릭 시 모바일 메뉴 열림/닫힘 (`classList.toggle('active')`)
   - [x] **위로 가기(Scroll-to-top) 버튼**:
@@ -66,19 +66,19 @@
 
 ### 4) GitHub API 연동 (비동기 처리)
 
-- [ ] `fetch` 및 `async/await`로 `https://api.github.com/users/{본인아이디}/repos` 호출
-- [ ] `try...catch` 예외 처리 (시간당 60회 제한 등 403 에러 처리 포함)
-- [ ] **상태별 UI 분기**:
-  - [ ] 로딩 상태: 로딩 중 텍스트 또는 스피너 표시
-  - [ ] 성공 상태: `map`을 사용해 프로젝트 카드 동적 렌더링 (이름, 설명, 별점 등)
-  - [ ] 에러 상태: "프로젝트를 불러올 수 없습니다" 안내 + [다시 시도] 버튼
-  - [ ] 빈 상태: 레포지토리가 없을 때 안내 문구
+- [x] `fetch` 및 `async/await`로 `https://api.github.com/users/{본인아이디}/repos` 호출
+- [x] `try...catch` 예외 처리 (시간당 60회 제한 등 403 에러 처리 포함)
+- [x] **상태별 UI 분기**:
+  - [x] 로딩 상태: 로딩 중 텍스트 또는 스피너 표시
+  - [x] 성공 상태: `map`을 사용해 프로젝트 카드 동적 렌더링 (이름, 설명, 별점 등)
+  - [x] 에러 상태: "프로젝트를 불러올 수 없습니다" 안내 + [다시 시도] 버튼
+  - [x] 빈 상태: 레포지토리가 없을 때 안내 문구
 
 ### 5) 상태 관리 패턴 (핵심 평가 기준)
 
-- [ ] **"사용자 이벤트 → 상태 변경 → 화면 렌더링" 흐름 3가지 이상 확립**:
+- [x] **"사용자 이벤트 → 상태 변경 → 화면 렌더링" 흐름 3가지 이상 확립**:
   - [x] **흐름 1 (다크 모드)**: 토글 클릭 → 테마 상태 변경 (`data-theme`, `localStorage`) → 화면 전체 스타일 변경
-  - [ ] **흐름 2 (GitHub API)**: 데이터 요청 → 로딩/성공/에러/빈 상태 변경 → Projects 섹션 UI 분기 렌더링
+  - [x] **흐름 2 (GitHub API)**: 데이터 요청 → 로딩/성공/에러/빈 상태 변경 → Projects 섹션 UI 분기 렌더링
   - [x] **흐름 3 (폼 유효성)**: 사용자 입력/제출 → 유효성 상태 검증 → 에러/성공 메시지 동적 표시
 
 ### 6) 배포 및 문서화 (README.md)
@@ -106,7 +106,7 @@
 - [x] 순수 바닐라 HTML, CSS, JavaScript만 사용 (React, Vue, jQuery, Bootstrap, Tailwind 등 외부 라이브러리 사용 금지)
 - [x] 허용된 외부 리소스만 사용 (Google Fonts, Font Awesome 등 웹폰트/아이콘)
 - [x] 코드 제약 준수 (`var` 미사용, 인라인 이벤트 속성 미사용)
-- [ ] 최신 Chrome 브라우저 기준 정상 동작 확인
+- [x] 최신 Chrome 브라우저 기준 정상 동작 확인
 
 ---
 

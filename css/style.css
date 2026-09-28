@@ -111,8 +111,204 @@ section.visible {
     }
 }
 
+/* =========================================
+   공통 2분할 섹션 레이아웃 (1/3 : 2/3)
+========================================= */
+/* 1. 이미지 컨테이너: 1:1 비율 고정 */
+.section-media {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+/* 이미지는 컨테이너를 꽉 채우되, 비율 유지하며 중앙 크롭 */
+.section-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    transition: transform 0.4s ease;
+}
+
+/* 이미지 호버 시 살짝 확대 효과 */
+.section-media:hover img {
+    transform: scale(1.05);
+}
+
+/* 2. 모바일 기본 (화면이 좁으므로 위아래로 쌓임) */
+.split-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+}
+
+.section-content {
+    width: 100%;
+}
+
+/* 3. 태블릿 (768px 이상): 가로 배치 */
+@media (min-width: 768px) {
+    .split-section {
+        flex-direction: row;
+        /* 좌우 나란히 배치 */
+        align-items: center;
+        /* 세로 중앙 정렬 */
+        justify-content: space-between;
+        gap: 48px;
+    }
+
+    /* ⭐️ 핵심: 1/3 : 2/3 비율 분할 (1 대 2) */
+    .section-media {
+        flex: 1;
+        /* 전체의 1/3 (약 33.3%) */
+        width: auto; /* 모바일 100% 해제 */
+    }
+
+    .section-content {
+        flex: 2;
+        /* 전체의 2/3 (약 66.6%) */
+        width: auto;
+    }
+}
+
+/* 4. 데스크톱 (1024px 이상): 여백 및 타이포 세부 조율 */
+@media (min-width: 1024px) {
+    .split-section {
+        gap: 64px;
+    }
+
+    .section-name {
+        font-size: 42px;
+    }
+
+    .section-media {
+        flex: 1;
+    }
+
+    .section-content {
+        flex: 2;
+    }
+}
+
+/* =========================================
+   Hero 섹션
+========================================= */
+/* CTA 버튼 그룹 */
+.hero-cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   Skills 섹션
+========================================= */
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+}
+
+.skills-list li {
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* =========================================
+   공통 섹션 부제목 (.section-desc)
+========================================= */
+.section-desc {
+    color: var(--text-secondary);
+    margin-top: -8px;
+    margin-bottom: 24px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   Footer
+========================================= */
+footer {
+    background-color: var(--bg-secondary);
+}
+
+.footer-content {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding: 24px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.footer-copy {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--accent-color);
+    font-size: 14px;
+    font-weight: bold;
+    transition: color var(--transition-speed);
+}
+
+.footer-links a:hover {
+    color: var(--accent-hover);
+}
 
 /* 이미지 관련 */
+
 
 /* 플로팅 버튼 */
 .floating-container {
@@ -286,7 +482,12 @@ header.scrolled {
     border-radius: 12px;
     padding: 20px;
     box-shadow: var(--card-shadow);
-    transition: transform var(--transition-speed);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* #projects-status는 기본적으로 숨기고 .show 클래스가 붙으면 보임 */
@@ -305,12 +506,27 @@ header.scrolled {
     border: 1px solid var(--border-color);
     padding: 10px 30px;
     border-radius: 20px;
-}
-
-#contact-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.btn-submit {
+    align-self: flex-start;
+    padding: 12px 32px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
 }
 
 #message {
