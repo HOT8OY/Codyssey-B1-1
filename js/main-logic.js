@@ -179,12 +179,12 @@ async function fetchGithubRepos() {
 
         // 5. 성공 상태 - map으로 카드 렌더링
         containerEl.innerHTML = repos.map(repo => `
-            <div class="project-card">
+            <article class="project-card">
             <h3>${repo.name}</h3>
             <p>${repo.description || '설명 없음'}</p>
             <span>⭐️ ${repo.stargazers_count}</span>
             <a href="${repo.html_url}" target='_blank'>Github 보기</a>
-            </div>`)
+            </article>`)
             .join('');
     } catch (error) {
         // 6. 에러 상태 처리
