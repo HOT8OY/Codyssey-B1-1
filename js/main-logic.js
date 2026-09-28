@@ -15,7 +15,7 @@ window.addEventListener('scroll', () => {
 });
 
 scrollTop.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior: 'smooth'})
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 });
 
 // - [ ] **다크 모드 토글 & 상태 저장**:
@@ -45,7 +45,7 @@ darkmodeBtn.addEventListener('click', () => {
 const header = document.querySelector('header');
 window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 60)
-    }
+}
 )
 
 // - [ ] **Contact 폼 유효성 검증**:
@@ -97,7 +97,7 @@ contactForm.addEventListener('submit', (e) => {
         messageError.textContent = '내용을 입력하세요.'
     }
     // 7. 모든 검증 통과 (성공 처리)
-    if(isValid) {
+    if (isValid) {
         formStatus.textContent = '🎉 문의가 성공적으로 전송되었습니다!';
         contactForm.reset(); // 입력필드 초기화
     }
@@ -129,3 +129,75 @@ const sections = document.querySelectorAll('section');
 sections.forEach(section => {
     observer.observe(section);
 });
+
+//  4) GitHub API 연동 (비동기 처리)
+// - [ ] `fetch` 및 `async/await`로 `https://api.github.com/users/{본인아이디}/repos` 호출
+// - [ ] `try...catch` 예외 처리 (시간당 60회 제한 등 403 에러 처리 포함)
+// - [ ] **상태별 UI 분기**:
+//   - [ ] 로딩 상태: 로딩 중 텍스트 또는 스피너 표시
+//   - [ ] 성공 상태: `map`을 사용해 프로젝트 카드 동적 렌더링 (이름, 설명, 별점 등)
+//   - [ ] 에러 상태: "프로젝트를 불러올 수 없습니다" 안내 + [다시 시도] 버튼
+//   - [ ] 빈 상태: 레포지토리가 없을 때 안내 문구
+
+const GITHUB_USERNAME = "HOT8OY";
+
+// DOM 요소 선택
+const statusEl = document.querySelector('#projects-status') // 성공, 실패, 없음을 표시하는 상태 칸
+const containerEl = document.querySelector('#projects-container') // Git repo가 들어갈 Grid컨테이너
+
+async function fetchGithubRepos() {
+    // 1. 로딩 상태 표시
+    statusEl.innerHTML = `
+        < div class="spinner" ></ >
+        <p>Github 프로젝트를 불러오는 중...</p>
+        `;
+    statusEl.classList.add('show');
+    containerEl.ineerHTML = ''; // 이전 카드 초기화
+
+    try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos`);
+
+        // 2. HTTP 에러 처리
+        if (response.status == 403) {
+            throw new Error('API 호출 한도 초과 (시간당 60회. 잠시 후 다시 시도하세요.');
+        }
+        if (!response.ok) {
+            throw new Error(`요청 실패: ${response.status}`);
+        }
+
+        const repos = await response.json();
+
+        // 3. 로딩 안내 숨기기
+        statusEl.classList.remove('show');
+
+        // 4. 빈 상태 처리
+        if (repos.length === 0) {
+            statusEl.innerHTML = '<p>표시할 프로젝트가 없습니다.</p>';
+            statusEl.classList.add('show');
+            return;
+        }
+
+        // 5. 성공 상태 - map으로 카드 렌더링
+        containerEl.innerHTML = repos.map(repo => `
+            <div class="project-card">
+            <h3>${repo.name}</h3>
+            <p>${repo.description || '설명 없음'}</p>
+            <span>⭐️ ${repo.stargazer_count}</span>
+            <a href="${repo.html_url}" target='_blank'>Github 보기</a>
+            </div>`)
+            .join('');
+    } catch (error) {
+        // 6. 에러 상태 처리
+        statusEl.innerHTML = `
+        <p>프로젝트를 불러올 수 없습니다.</p>
+        <button id="retry-btn">다시 시도</button>
+        `;
+        statusEl.classList.add('show');
+        console.error('레포지토리 로드 실패: ', error.message);
+
+        // 7. 다시 시도 번튼 이벤트
+        document.querySelector('#retry-btn').addEventListener('click', fetchGithubRepos);
+    }
+}
+// 페이지 로드 시 실행
+fetchGithubRepos();
